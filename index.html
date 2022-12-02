@@ -13,19 +13,14 @@
         .nav-link {
             color: white;
         }
-
         .active {
             color: cornflowerblue;
-        }
-
-        .temperaturesBtns {
-            margin-top: 25px;
         }
         .btn {
             margin-bottom: 10px;
         }
         tr {
-            outline: thin solid
+            outline: thin solid;
         }
 
         th {
@@ -50,7 +45,7 @@
                 // console.log(weather);
                 ct++;
             });
-            chart();
+
         }
 
         function addRefresh(n) {
@@ -60,9 +55,8 @@
 
         function chart(n) {
             let oStr = "";
-            let tempData = 1; //Sets if it should be Celsius (t) or Fahrenheit (f)
-            oStr += "<table class='table table-striped table-hover table-sm'><tr><th>Time</th>";
-            oStr += "<th>Temperature</th>";
+            let tempData; //Sets if it should be Celsius (t) or Fahrenheit (f)
+            oStr += "<table class='table table-striped table-hover table-sm'><tr><th>Time</th><th>Temperature</th><th>Humidity</th></tr>";
             let symbol;
             if (n) {
                 tempData = 1;
@@ -75,8 +69,7 @@
                 document.getElementById("bt1").style.backgroundColor = "black";
                 document.getElementById("bt2").style.backgroundColor = "gray";
             }
-            oStr += "<th>Humidity</th></tr>";
-            for (let i = 0; i < weather.length; i++) {
+            for (let i = weather.length-1; i > 0; i--) {
                 let data = weather[i];
                 // console.log(data);
                 oStr += `<tr><td>${data[0]}</td>`;
@@ -101,23 +94,23 @@
 </ul>
 
 <div class="text-center">
+    <p style="margin-top: 25px; margin-bottom: 10px">
+        Choose unit of measure to view data:
+    </p>
     <button type="button" id="bt1" class="btn btn-dark temperaturesBtns" onclick="addRefresh(false)">Fahrenheit</button>
     <button type="button" id="bt2" class="btn btn-dark temperaturesBtns" onclick="addRefresh(true)">Celsius</button>
     <span id="refresh"></span>
     <div class="container">
         <div class="row">
             <div class="col-sm-3"></div>
-            <div id="chart" class="col-sm-6"></div>
+            <div id="chart" class="col-sm-6">
+
+            </div>
             <div class="col-sm-3"></div>
         </div>
     </div>
 </div>
 
-<!---->
-
-
-
-<!---->
 <footer class="bg-light text-center">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2022 Copyright - Andrew Musielak, Juan Munoz, and Stephanie Joanem
