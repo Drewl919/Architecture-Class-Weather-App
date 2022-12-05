@@ -68,6 +68,7 @@
         }
 
         function addRefresh(n) {
+            setUpGraphData();
             document.getElementById("refresh").innerHTML = "<br><button type='button' class='btn btn-outline-danger' onclick='window.location.reload()'>Refresh Data</button>"
             table(n)
         }
@@ -123,35 +124,35 @@
                 graphData.humidity[ct] = data[3];
                 ct++;
             }
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: graphData.date,
+                    datasets: [{
+                        data: graphData.celsius,
+                        borderColor: "red",
+                        fill: false
+                    },{
+                        data: graphData.fahrenheit,
+                        borderColor: "green",
+                        fill: false
+                    },{
+                        data: graphData.humidity,
+                        borderColor: "blue",
+                        fill: false
+                    }]
+                },
+                options: {
+                    legend: {display: false}
+                }
+            });
         }
 
-        new Chart("myChart", {
-            type: "line",
-            data: {
-                labels: graphData.date,
-                datasets: [{
-                    data: graphData.celsius,
-                    borderColor: "red",
-                    fill: false
-                },{
-                    data: graphData.fahrenheit,
-                    borderColor: "green",
-                    fill: false
-                },{
-                    data: graphData.humidity,
-                    borderColor: "blue",
-                    fill: false
-                }]
-            },
-            options: {
-                legend: {display: false}
-            }
-        });
 
 
     </script>
 </head>
-<body onload="load(); setUpGraphData();">
+<body onload="load();">
 <ul class="nav justify-content-center navbar-dark bg-dark">
     <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="#">Data</a>
