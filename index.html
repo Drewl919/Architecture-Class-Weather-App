@@ -59,6 +59,12 @@
                 // console.log(weather);
                 ct++;
             });
+            (function countdown(remaining) {
+                if(remaining <= 0)
+                    location.reload(true);
+                document.getElementById('countdown').innerHTML = `Refreshing page in: ${remaining} seconds`;
+                setTimeout(function(){ countdown(remaining - 1); }, 1000);
+            })(240); // 5 seconds
         }
 
         function addRefresh(n) {
@@ -189,6 +195,7 @@
 </ul>
 
 <div class="text-center">
+    <p id="countdown" style="position: absolute"></p>
     <p style="margin-top: 25px; margin-bottom: 10px">
         Choose unit of measure to view data:
     </p>
