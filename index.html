@@ -12,7 +12,6 @@
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
     <title>Weather Data</title>
     <style>
         .nav-link {
@@ -51,7 +50,7 @@
         }
 
         function load() {
-            let ref = new Firebase('https://weather-data-90123-default-rtdb.firebaseio.com/Weather/');
+            let ref = new Firebase('https://weather-data-90123-default-rtdb.firebaseio.com/Base/');
             let ct = 0;
             ref.on("child_added", function (data) {
                 let newData = data.val();
