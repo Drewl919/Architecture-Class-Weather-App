@@ -9,8 +9,9 @@
 }
 tr {
     outline: thin solid;
-}
+    line-height: 5px;
 
+}
 th {
     padding-left: 30px;
     padding-right: 30px;
@@ -18,7 +19,34 @@ th {
 
 td {
     border: 1px solid gray;
+    height: 5px;
 }
 table {
     width: 200px;
+}
+h1 {
+    margin: 0px;
+    text-decoration: underline;
+}
+.chooseMeasure {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+.timeInfo {
+    position: static;
+    text-align: right;
+    padding: 3px 5px 0px 0px;
+}
+.backButton {
+    position: absolute;
+    color: white
+}
+#myChart {
+    width:100%;
+    max-width:1000px;
+    max-height: 500px;
+    height: 0px;
+}
+.copyright {
+    background-color: rgba(0, 0, 0, 0.2);
 }
