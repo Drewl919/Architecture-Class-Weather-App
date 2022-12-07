@@ -1,0 +1,24 @@
+.nav-link {
+    color: white;
+}
+.active {
+    color: cornflowerblue;
+}
+.btn {
+    margin-bottom: 10px;
+}
+tr {
+    outline: thin solid;
+}
+
+th {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+td {
+    border: 1px solid gray;
+}
+table {
+    width: 200px;
+}
