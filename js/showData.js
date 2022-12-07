@@ -16,7 +16,6 @@ function load(file) {
         weather[ct] = [newData.date, parseFloat(newData.cTemp).toFixed(1), parseFloat(newData.fTemp).toFixed(1), parseFloat(newData.humidity).toFixed(1)];
         ct++;
     });
-    console.log(weather);
     (function countdown(remaining) {
         if (remaining <= 0)
             location.reload(true);
@@ -27,6 +26,10 @@ function load(file) {
     })(60 * minutes);
     let dt = new Date();
     document.getElementById('date-time').innerHTML = dt.toISOString();
+    let delayInMilliseconds = 200
+    setTimeout(function() {
+        table(false)
+    }, delayInMilliseconds);
 }
 
 function table(n) {
@@ -48,7 +51,6 @@ function table(n) {
         document.getElementById("bt1").style.backgroundColor = "black";
         document.getElementById("bt2").style.backgroundColor = "gray";
     }
-    console.log(weather.length-1);
     for (let i = weather.length - 1; i > 0; i--) {
         let data = weather[i];
         oStr += "<tr>";
@@ -85,7 +87,6 @@ function setUpGraphData(type) {
     } else {
         for (let i = weather.length - 20; i < weather.length; i++) {
             let data = weather[i];
-            // console.log(`${weather[i]}`);
             graphData.date[ct] = data[0];
             graphData.celsius[ct] = data[1];
             graphData.fahrenheit[ct] = data[2];

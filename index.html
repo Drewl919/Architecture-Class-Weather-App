@@ -44,7 +44,13 @@
                 weatherSensor0[ct] = [parseFloat(newData.fTemp).toFixed(1), parseFloat(newData.cTemp).toFixed(1), parseFloat(newData.humidity).toFixed(1)];
                 ct++;
             });
-
+            let delayInMilliseconds = 200
+            setTimeout(function() {
+                display(0);
+                display(1);
+                display(2);
+                display(3);
+            }, delayInMilliseconds);
         }
 
         function display(n) {
@@ -52,17 +58,53 @@
             document.getElementById(`temp${n}`).innerHTML = `${data[0]}&degF (${data[1]}&degC)`;
             document.getElementById(`humid${n}`).innerHTML = `${data[2]}%`;
         }
+
+        function getZipInfo() {
+            let base = "https://api.zippopotam.us/us/";
+            let z = document.getElementById("zipCode").value;
+            let url = base + z;
+            fetch(url)
+                .then(res => res.json())
+                .then(function (data) {
+                    let oStr = "";
+                    if (data.places == undefined) {
+                        oStr = "No data found for zip:" + z;
+                    } else {
+                        let pl = data.places[0];
+                        let url2 = `https://api.openweathermap.org/data/2.5/weather?lat=${pl.latitude}&lon=${pl.longitude}&appid=b95687edcff04962f4397b994636eede&units=imperial`;
+                        fetch(url2)
+                            .then((res2 => res2.json()))
+                            .then(function (data) {
+                                let temp = data.main.temp;
+                                let speed = data.wind.speed;
+                                let icon = data.weather[0].icon;
+                                let img = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+                                oStr = "";
+                                oStr += `${pl['place name']}, ${pl.state}`;
+                                oStr += `<br/>Temp: ${temp}&degF`;
+                                oStr += `<br/>Speed: ${speed} MPH`;
+                                document.getElementById("currentWeather").innerHTML = oStr;
+                                document.getElementById("currentWeatherImg").innerHTML = `<img src='${img}' width="150px" height="150px"/>`;
+                            })
+                    }
+                    document.getElementById("currentWeather").innerHTML = oStr;
+                }).catch(function (err) {
+                console.log("Error: " + err)
+            })
+        }
     </script>
 
     <style>
         btn {
             padding: 20px;
         }
+
         .currents {
             padding-top: 50px;
-            padding-bottom:50px;
+            padding-bottom: 50px;
             outline: thin solid;
         }
+
     </style>
 
 
@@ -78,36 +120,48 @@
 
 </ul>
 
-<div class="container-fluid text-center" onmouseover="display(0);display(1);display(2);display(3);">
+<div class="container-fluid">
     <div class="container-fluid">
         <div class="row" style="padding-top: 50px; padding-bottom: 40px">
-            <div class="col-sm-4" onclick="location.href='Base.html'">
+            <div class="col-lg-4 text-center" onclick="location.href='Base.html'">
                 <div class="currents">
                     <h1>Base Station</h1><br/>
                     Current temperature: <span id="temp0"></span><br/>
                     Current humidity: <span id="humid0"></span>
                 </div>
             </div>
-            <div class="col-sm-8">
-
+            <div class="col-lg-8">
+                <h2 class="text-center">Current Weather</h2>
+                <div style="outline: thin solid;">
+                    <div class="row">
+                        <div class="col-lg-2" style="border-right: solid">
+                            <form style="padding: 10px">
+                                Zip: <input type="number" id="zipCode" min=10000 max=999999 class="form-control"/>
+                                <button type='button' onclick="getZipInfo()" class="btn btn-dark" style="margin-top: 10px">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-lg-7 text-center" id="currentWeather" style="font-size: 30px"></div>
+                        <div class="col-lg-3" id="currentWeatherImg"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row" style="padding-bottom: 50px;">
-            <div class="col-sm-4" onclick="location.href='Sensor_1.html'">
+        <div class="row text-center" style="padding-bottom: 50px;">
+            <div class="col-lg-4" onclick="location.href='Sensor_1.html'">
                 <div class="currents">
                     <h1>Sensor 1</h1><br/>
                     Current temperature: <span id="temp1"></span><br/>
                     Current humidity: <span id="humid1"></span>
                 </div>
             </div>
-            <div class="col-sm-4" onclick="location.href='Sensor_2.html'">
+            <div class="col-lg-4" onclick="location.href='Sensor_2.html'">
                 <div class="currents">
                     <h1>Sensor 2</h1> <br/>
                     Current temperature: <span id="temp2"></span><br/>
                     Current humidity: <span id="humid2"></span>
                 </div>
             </div>
-            <div class="col-sm-4" onclick="location.href='Sensor_3.html'">
+            <div class="col-lg-4" onclick="location.href='Sensor_3.html'">
                 <div class="currents">
                     <h1>Sensor 3</h1><br/>
                     Current temperature: <span id="temp3"></span><br/>
