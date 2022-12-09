@@ -45,7 +45,7 @@
                 weatherSensor0[ct] = [parseFloat(newData.fTemp).toFixed(1), parseFloat(newData.cTemp).toFixed(1), parseFloat(newData.humidity).toFixed(1)];
                 ct++;
             });
-            let delayInMilliseconds = 80
+            let delayInMilliseconds = 150
             setTimeout(function() {
                 display(0);
                 display(1);
