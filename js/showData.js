@@ -26,7 +26,7 @@ function load(file) {
     })(60 * minutes);
     let dt = new Date();
     document.getElementById('date-time').innerHTML = dt.toISOString();
-    let delayInMilliseconds = 80
+    let delayInMilliseconds = 1000
     setTimeout(function() {
         table(false)
     }, delayInMilliseconds);
