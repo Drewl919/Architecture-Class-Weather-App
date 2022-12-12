@@ -56,9 +56,21 @@
         }
 
         function display(n) {
-            let data = weatherSensor1[weatherSensor1.length - 1];
-            document.getElementById(`temp${n}`).innerHTML = `${data[0]}&degF (${data[1]}&degC)`;
-            document.getElementById(`humid${n}`).innerHTML = `${data[2]}%`;
+            let data0 = weatherSensor0[weatherSensor0.length - 1];
+            let data1 = weatherSensor1[weatherSensor1.length - 1];
+            let data2 = weatherSensor2[weatherSensor2.length - 1];
+            let data3 = weatherSensor3[weatherSensor3.length - 1];
+            document.getElementById(`temp${n}`).innerHTML = `${data0[0]}&degF (${data0[1]}&degC)`;
+            document.getElementById(`humid${n}`).innerHTML = `${data0[2]}%`;
+
+            document.getElementById(`temp${n}`).innerHTML = `${data1[0]}&degF (${data1[1]}&degC)`;
+            document.getElementById(`humid${n}`).innerHTML = `${data1[2]}%`;
+
+            document.getElementById(`temp${n}`).innerHTML = `${data2[0]}&degF (${data2[1]}&degC)`;
+            document.getElementById(`humid${n}`).innerHTML = `${data2[2]}%`;
+
+            document.getElementById(`temp${n}`).innerHTML = `${data3[0]}&degF (${data3[1]}&degC)`;
+            document.getElementById(`humid${n}`).innerHTML = `${data3[2]}%`;
         }
 
         function getZipInfo() {
